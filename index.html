@@ -41,8 +41,9 @@
   mindar-image="imageTargetSrc: targets.mind;"
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: false"
-renderer="alpha: true; colorManagement: true"
+  renderer="alpha: true; antialias: true; colorManagement: true"
   embedded
+  background="transparent: true"
 >
   <a-assets>
     <video
@@ -72,8 +73,14 @@ renderer="alpha: true; colorManagement: true"
   const status = document.querySelector("#status");
   const video = document.querySelector("#videograndma");
   const target = document.querySelector("#target");
+  const scene = document.querySelector("a-scene");
 
   status.innerText = "Camera ready. Searching target...";
+
+  scene.addEventListener("loaded", () => {
+    const renderer = scene.renderer;
+    renderer.setClearColor(0x000000, 0);
+  });
 
   video.addEventListener("loadeddata", () => {
     status.innerText = "Video loaded. Searching target...";
