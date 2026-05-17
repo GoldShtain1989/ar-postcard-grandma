@@ -89,15 +89,19 @@
     status.innerText = "VIDEO ERROR: file not loaded";
   });
 
-  target.addEventListener("targetFound", async () => {
-    status.innerText = "TARGET FOUND. Trying video...";
-    try {
-      await video.play();
-      status.innerText = "TARGET FOUND. VIDEO PLAYING";
-    } catch (e) {
-      status.innerText = "TARGET FOUND. VIDEO BLOCKED";
-    }
-  });
+target.addEventListener("targetFound", async () => {
+  status.innerText = "TARGET FOUND";
+
+  video.muted = false;
+  video.volume = 1;
+
+  try {
+    await video.play();
+    status.innerText = "VIDEO + SOUND";
+  } catch(e){
+    status.innerText = "Tap screen";
+  }
+});
 
   target.addEventListener("targetLost", () => {
     status.innerText = "Target lost";
